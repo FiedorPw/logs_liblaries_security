@@ -113,12 +113,29 @@ W przypadku Aplikacji napisanej w JAVA wykorzystywany będzie OWASP Dependency C
    gdzie: `path_to_host_folder_to_scan` to ścieżka do pobranego na stacje roboczą folderu `Python/Flask_Book_Library`
 
     W tym przypadku wynik analizy pojawi się na konsoli
-2. **Analiza wyników**
+
+​	**Odpowiedz**
+
+​	Używając narzędzia znaleziono kilka kluczy prywatnych oraz jeden false_positive
+
+1. **Analiza wyników**
     Niezależnie od wyboru aplikacji, która była analizowana wyniki zawierają informację o:
     - Który pakiet, w jakiej wersji jest podatny
     - Opis podatności (czasem krótki, z linkiem zawierającym więcej informacji)
 
     Należy wybrać jedną wykrytą podatność/pakiet, który zawiera podatność (o najwyższej krytyczności), a następnie wykonać analize możliwości jego wykorzystania. Analiza to nie studium użycia - nie ma potrzeby aby próbować wykorzystać podatność, która została wykryta w danej bibliotece. Chodzi o przeczytanie i zweryfikowanie co powoduje wystąpienie podatności w danym pakiecie typu `W pakiecie X wykryto podatność typu RCE oznaczoną jako Krytyczna. Wykorzystanie podatności jest możliwe po uruchomieniu metody Y z klasy Z. Po analizie w badanej aplikacji klasa Z nie jest wykorzystywana także prawdopodobieństwo wykorzystania tej podatności jest minimalne`
+
+​	
+
+​	**Odpowiedz** 
+
+​	Żadna z przeanalizowanych bibliotek wykazała wysokiego poziomu zagrożenia. Podatnością biblioteki która mogła by zostać wykorzystana jest SSTI w jinja2 jednak jest to mala doktliwe przez praktykę sandboxowania niezaufanych templatów. Pozostałe podatności
+
+	1. jinja2 3.1.2 - podatność polega na exploitacji metody xmlattr - nie wykorzystywanej w tym kodzie
+	1. Werkezeug debugger voulneratibilty - kod serwera nie działa w trybie developerskim
+	1. Libcurl - nie używany bezpośrednio w kodzie jednak może być wykorzystywany przez mechanizmy przepłuwu danych w kontenerze lub przez framework
+
+
 
 
 ## Credits
